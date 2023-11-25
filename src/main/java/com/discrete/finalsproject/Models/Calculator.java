@@ -88,7 +88,10 @@ public class Calculator {
 
     // TODO: caclulate X minus mean - Leo
     public static void calculateXMinusMean(){
-
+        xMinusMean = new ArrayList<>();
+        for (Double d : data) {
+            xMinusMean.add(d - mean);
+        }
     }
 
     // Get x minus mean
@@ -98,8 +101,10 @@ public class Calculator {
 
     // TODO: calculate X minus mean squared - Leo
     public static void calculateXMinusMeanSquared(){
-        // Set the value of x minus mean squared
-        // this.xMinusMeanSquared =
+        xMinusMeanSquared = new ArrayList<>();
+        for (Double d : xMinusMean) {
+            xMinusMeanSquared.add(Math.pow(d, 2));
+        }
     }
 
     // Get x minus mean squared
