@@ -1,0 +1,29 @@
+.mainFxmlClass {
+    #pane{
+        -fx-background-size: 1080 720;
+        -fx-background-radius: 20;
+        -fx-border-radius: 20;
+        -fx-background-color: white;
+    }
+}
+.Logo{
+    -fx-font-size: 200;
+    -fx-font-family: "Poppins Black";
+    -fx-font-weight: bold;
+    -fx-text-fill: #101010;
+}
+
+.text{
+    -fx-font-size: 20;
+    -fx-font-family: Poppins;
+}
+
+.button{
+    -fx-pref-width: 200;
+    -fx-font-size: 20;
+    -fx-font-family: Poppins;
+    -fx-background-color: #f2f2f2;
+    -fx-border-color: #f2f2f2;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}

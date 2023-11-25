@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="mainFxmlClass" stylesheets="@../Styles/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.discrete.finalsproject.Controllers.MainController">
+   <children>
+      <AnchorPane layoutX="130.0" layoutY="174.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TextField fx:id="inputField" layoutX="276.0" layoutY="419.0" prefHeight="57.0" prefWidth="520.0" promptText="Enter data set separated by commas">
+               <font>
+                  <Font name="Poppins Regular" size="25.0" />
+               </font>
+            </TextField>
+            <Button fx:id="populationButton" layoutX="320.0" layoutY="504.0" mnemonicParsing="false" onAction="#onPopulationButtonClicked" text="Population" />
+            <Button fx:id="sampleButton" layoutX="558.0" layoutY="503.0" mnemonicParsing="false" onAction="#onSampleButtonClicked" text="Sample" />
+            <Label id="Logo" layoutX="161.0" layoutY="139.0" style="-fx-font-size: 150;" styleClass="Logo" text="DONNAPP" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="170.0">
+               <font>
+                  <Font name="Poppins Black" size="200.0" />
+               </font>
+            </Label>
+            <Label layoutX="181.0" layoutY="341.0" style="-fx-font-size: 25;" text="Your reliable mean, standard deviation, and variance calculator" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
