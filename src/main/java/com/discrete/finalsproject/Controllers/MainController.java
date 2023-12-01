@@ -29,12 +29,23 @@ public class MainController implements Initializable {
     @FXML
     private AnchorPane scroll;
 
+    @FXML
+    private ImageView meanInfo, standardDevInfo, varianceInfo;
+
     // Buttons
     Image sampleBtnImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/SampleBtn.png")));
     Image sampleBtnImgClicked = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/SampleBtn_P.png")));
 
     Image populationBtnImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/PopulationBtn.png")));
     Image populationBtnImgClicked = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/PopulationBtn_P.png")));
+
+    // ImageInfos
+    Image meanInfoImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/MeanDef.png")));
+    Image standardDevInfoImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/StandardDevDef.png")));
+    Image varianceInfoImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/VarianceDef.png")));
+    Image meanInfoSelectedImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/MeanDefSelected.png")));
+    Image standardDevInfoSelectedImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/StandardDevDefSelected.png")));
+    Image varianceInfoSelectedImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/VarianceDefSelected.png")));
 
     String clickedButton = "None";
     private ArrayList<Double> getInputData(){
@@ -151,6 +162,56 @@ public class MainController implements Initializable {
         scroll.setOnScroll(scrollEvent -> {
             if (scroll.getLayoutY() + scrollEvent.getDeltaY() > yPosition) return;
             scroll.setLayoutY(scroll.getLayoutY() + scrollEvent.getDeltaY());
+        });
+
+        // Set onhover listeners for ImageView infos
+        onHover(meanInfo, meanInfoSelectedImg, meanInfoImg);
+        onHover(standardDevInfo, standardDevInfoSelectedImg, standardDevInfoImg);
+        onHover(varianceInfo, varianceInfoSelectedImg, varianceInfoImg);
+
+        // Set onCLick listeners for ImageView infos
+        goToLink(meanInfo, "https://byjus.com/maths/mean/");
+        goToLink(standardDevInfo, "https://byjus.com/maths/standard-deviation/#:~:text=Standard%20Deviation%20is,statistical%20problems.");
+        goToLink(varianceInfo, "https://byjus.com/maths/variance/");
+    }
+
+    private void goToLink(ImageView imageView, String link) {
+        imageView.setOnMousePressed(mouseEvent -> {
+            try {
+                java.awt.Desktop.getDesktop().browse(java.net.URI.create(link));
+            } catch (java.io.IOException e) {
+                System.out.println(e.getMessage());
+            }
+        });
+    }
+
+    private void onHover(ImageView imageView, Image selected, Image normal) {
+        imageView.setOnMouseEntered(mouseEvent -> {
+            imageView.setImage(selected);
+
+            // scale x and y to expand the image
+            imageView.setScaleX(1.025);
+            imageView.setScaleY(1.025);
+
+            // Set opacity to 1
+            imageView.setOpacity(1);
+
+            // change the cursor to a hand
+            imageView.getScene().setCursor(javafx.scene.Cursor.HAND);
+
+        });
+        imageView.setOnMouseExited(mouseEvent -> {
+            imageView.setImage(normal);
+
+            // scale x and y to shrink the image
+            imageView.setScaleX(1);
+            imageView.setScaleY(1);
+
+            // Set opacity to 0.75
+            imageView.setOpacity(0.75);
+
+            // change the cursor to a hand
+            imageView.getScene().setCursor(javafx.scene.Cursor.DEFAULT);
         });
     }
 }

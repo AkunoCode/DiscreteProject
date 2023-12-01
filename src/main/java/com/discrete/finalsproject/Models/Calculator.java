@@ -22,9 +22,11 @@ public class Calculator {
 
     // TODO: Calculate mean - Nicole
     public static void calculateMean(){
-        // Set the value of mean
+
         // this.mean =
     }
+
+
 
     // Get mean
     public double getMean(){
