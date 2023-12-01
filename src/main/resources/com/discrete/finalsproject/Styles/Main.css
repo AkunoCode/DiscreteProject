@@ -6,24 +6,52 @@
         -fx-background-color: white;
     }
 }
+
 .Logo{
-    -fx-font-size: 200;
+    -fx-font-size: 190;
     -fx-font-family: "Poppins Black";
     -fx-font-weight: bold;
-    -fx-text-fill: #101010;
+    -fx-text-fill: black;
 }
 
 .text{
-    -fx-font-size: 20;
     -fx-font-family: Poppins;
 }
 
-.button{
-    -fx-pref-width: 200;
+.heading-text{
+    -fx-font-size: 40;
+    -fx-font-weight: bold;
+}
+
+.normal-text{
     -fx-font-size: 20;
-    -fx-font-family: Poppins;
+}
+
+.rectangle-container{
     -fx-background-color: #f2f2f2;
-    -fx-border-color: #f2f2f2;
-    -fx-border-radius: 20;
-    -fx-background-radius: 20;
+    -fx-border-color: #0e0e0e;
+    -fx-border-width: 5;
+    -fx-border-radius: 5 0 0 5;
+    -fx-background-radius: 5;
+}
+
+#closebtn{
+    -fx-background-color: #ff6b6b;
+    -fx-border-color: #0e0e0e;
+    -fx-border-width: 5;
+    -fx-border-radius: 0 5 5 0;
+    -fx-background-radius: 0 5  5 0;
+    -fx-pref-height: 63;
+    -fx-pref-width: 60;
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+    -fx-padding: 0;
+}
+
+.shadow{
+    -fx-background-color: #0e0e0e;
+    -fx-border-color: #0e0e0e;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
 }

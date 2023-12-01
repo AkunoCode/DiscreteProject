@@ -14,9 +14,6 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("FXMLs/Main.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        scene.setFill(Color.TRANSPARENT); // Make the background transparent
-        stage.initStyle(StageStyle.UNDECORATED); // Remove the titleBar
-        stage.initStyle(StageStyle.TRANSPARENT); // Make the window transparent
         stage.setScene(scene);
         stage.show();
     }

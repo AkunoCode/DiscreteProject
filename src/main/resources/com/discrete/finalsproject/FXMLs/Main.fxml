@@ -10,40 +10,47 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="mainFxmlClass" stylesheets="@../Styles/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.discrete.finalsproject.Controllers.MainController">
    <children>
-      <AnchorPane layoutX="130.0" layoutY="174.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1419.0" prefWidth="1080.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="-699.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="scroll" layoutY="-1.6" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1589.0" prefWidth="1080.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <TextField fx:id="inputField" layoutX="276.0" layoutY="419.0" prefHeight="57.0" prefWidth="520.0" promptText="Enter data set separated by commas">
+            <AnchorPane layoutY="1.0" prefHeight="452.0" prefWidth="1080.0" style="-fx-border-color: #0e0e0e; -fx-border-width: 0 0 5 0; -fx-background-color: D9D9D9;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0" />
+            <TextField fx:id="inputField" layoutX="124.0" layoutY="417.0" prefHeight="63.0" prefWidth="777.0" promptText="Enter data set separated by commas" styleClass="rectangle-container">
                <font>
                   <Font name="Poppins Regular" size="25.0" />
                </font>
             </TextField>
-            <Button fx:id="populationButton" layoutX="320.0" layoutY="504.0" mnemonicParsing="false" onAction="#onPopulationButtonClicked" text="Population" />
-            <Button fx:id="sampleButton" layoutX="558.0" layoutY="503.0" mnemonicParsing="false" onAction="#onSampleButtonClicked" text="Sample" />
-            <Label id="Logo" alignment="CENTER" layoutX="161.0" layoutY="139.0" style="-fx-font-size: 150;" styleClass="Logo" text="STATIFY" textAlignment="CENTER" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="170.0">
+            <Label id="Logo" alignment="CENTER" layoutX="150.4" layoutY="99.2" prefHeight="172.0" prefWidth="779.0" styleClass="Logo" text="STATIFY" textAlignment="CENTER" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.39999999999998" AnchorPane.topAnchor="99.0">
                <font>
                   <Font name="Poppins Black" size="200.0" />
                </font>
             </Label>
-            <Label layoutX="198.0" layoutY="341.0" style="-fx-font-size: 25;" text="Your reliable mean, standard deviation, and variance calculator" />
-            <AnchorPane layoutX="104.0" layoutY="690.0" prefHeight="761.0" prefWidth="979.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="51.0">
-               <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Assets/mean.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="301.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Assets/standard_deviation.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="580.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Assets/variance.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
+            <Label layoutX="138.0" layoutY="308.0" style="-fx-font-size: 25;" text="Your reliable mean, standard deviation, and variance calculator" />
+            <ImageView fitHeight="226.0" fitWidth="950.0" layoutX="65.0" layoutY="713.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/MeanDef.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="322.0" fitWidth="949.0" layoutX="66.0" layoutY="950.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/VarianceDef.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="322.0" fitWidth="949.0" layoutX="66.0" layoutY="1250.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/StandardDevDef.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="populationBtn" fitHeight="150.0" fitWidth="340.0" layoutX="175.0" layoutY="504.0" onMousePressed="#onPopulationButtonClicked" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Assets/PopulationBtn.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="sampleBtn" fitHeight="150.0" fitWidth="340.0" layoutX="565.0" layoutY="507.0" onMousePressed="#onSampleButtonClicked" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../Assets/SampleBtn.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="70.0" layoutY="643.0" styleClass="heading-text" text="Learn More" />
+            <Button id="closebtn" layoutX="896.0" layoutY="417.0" mnemonicParsing="false" onMousePressed="#onXButtonClicked" prefHeight="33.0" prefWidth="94.0" style="-fx-cursor: hand;" text="X" />
          </children>
       </AnchorPane>
    </children>
