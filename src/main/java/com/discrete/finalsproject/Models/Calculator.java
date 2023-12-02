@@ -30,7 +30,7 @@ public class Calculator {
     }
 
     // Get mean
-    public double getMean(){
+    public static double getMean(){
         return mean;
     }
 
@@ -41,7 +41,7 @@ public class Calculator {
     }
 
     // Get variance
-    public double getVariance(){
+    public static double getVariance(){
         return sampleVariance;
     }
 
@@ -52,7 +52,7 @@ public class Calculator {
     }
 
     // Get standard deviation
-    public double getStandardDeviation(){
+    public static double getStandardDeviation(){
         return sampleStandardDeviation;
     }
 
@@ -117,5 +117,25 @@ public class Calculator {
     // Get x minus mean squared
     public static ArrayList<Double> getXMinusMeanSquared(){
         return xMinusMeanSquared;
+    }
+
+    // Calculate all for sample
+    public static void calculateAllForSample(){
+        calculateMean();
+        calculateXMinusMean();
+        calculateXMinusMeanSquared();
+        calculateSumOfXMinusMeanSquared();
+        calculateVariance();
+        calculateStandardDeviation();
+    }
+
+    // Calculate all for population
+    public static void calculateAllForPopulation(){
+        calculateMean();
+        calculateXMinusMean();
+        calculateXMinusMeanSquared();
+        calculateSumOfXMinusMeanSquared();
+        calculatePopulationVariance();
+        calculatePopulationStandardDeviation();
     }
 }
