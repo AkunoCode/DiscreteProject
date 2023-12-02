@@ -22,8 +22,13 @@ public class Calculator {
 
     // TODO: Calculate mean - Nicole
     public static void calculateMean(){
-        // Set the value of mean
-        // this.mean =
+        double sum = 0.0;
+
+        for (Double d : data) {
+            sum += d;
+        }
+
+        mean = sum / numberOfData;
     }
 
     // Get mean
@@ -55,8 +60,15 @@ public class Calculator {
 
     // TODO: Calculate population variance - Nicole
     public static void calculatePopulationVariance(){
-        // Set the value of population variance
-        // this.populationVariance =
+       ArrayList<Double> xMinusMeanSquared = getXMinusMeanSquared();
+
+       double sumXMinusMeanSquared = 0.0;
+
+       for (Double squaredValue : xMinusMeanSquared) {
+           sumXMinusMeanSquared += squaredValue;
+       }
+
+       populationVariance = sumXMinusMeanSquared / numberOfData;
     }
 
     // Get population variance
@@ -66,8 +78,8 @@ public class Calculator {
 
     // TODO: Calculate population standard deviation - Nicole
     public static void calculatePopulationStandardDeviation(){
-        // Set the value of population standard deviation
-        // this.populationStandardDeviation =
+        calculatePopulationVariance();
+        populationStandardDeviation = Math.sqrt(populationVariance);
     }
 
     // Get population standard deviation
