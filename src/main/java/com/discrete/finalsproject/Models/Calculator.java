@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Calculator {
     private static ArrayList<Double> data;
     private static int numberOfData;
-    private static double mean, sampleStandardDeviation, sampleVariance,
+    private static double sumOfData, mean, sampleStandardDeviation, sampleVariance,
             sumOfXMinusMeanSquared, populationStandardDeviation, populationVariance;
     private static ArrayList<Double> xMinusMean, xMinusMeanSquared;
 
@@ -22,8 +22,11 @@ public class Calculator {
 
     // TODO: Calculate mean - Nicole
     public static void calculateMean(){
-        // Set the value of mean
-        // this.mean =
+        sumOfData = 0.0;
+        for (Double d : data) {
+            sumOfData += d;
+        }
+        mean = sumOfData / numberOfData;
     }
 
     // Get mean
@@ -55,8 +58,12 @@ public class Calculator {
 
     // TODO: Calculate population variance - Nicole
     public static void calculatePopulationVariance(){
-        // Set the value of population variance
-        // this.populationVariance =
+        ArrayList<Double> xMinusMeanSquared = getXMinusMeanSquared();
+        sumOfXMinusMeanSquared = 0.0;
+        for (Double squaredValue : xMinusMeanSquared) {
+            sumOfXMinusMeanSquared += squaredValue;
+        }
+        populationVariance = sumOfXMinusMeanSquared / numberOfData;
     }
 
     // Get population variance
@@ -66,8 +73,8 @@ public class Calculator {
 
     // TODO: Calculate population standard deviation - Nicole
     public static void calculatePopulationStandardDeviation(){
-        // Set the value of population standard deviation
-        // this.populationStandardDeviation =
+        calculatePopulationVariance();
+        populationStandardDeviation = Math.sqrt(populationVariance);
     }
 
     // Get population standard deviation
