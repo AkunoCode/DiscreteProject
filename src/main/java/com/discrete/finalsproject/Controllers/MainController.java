@@ -4,10 +4,12 @@ import com.discrete.finalsproject.Models.Calculator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,6 +33,17 @@ public class MainController implements Initializable {
 
     @FXML
     private ImageView meanInfo, standardDevInfo, varianceInfo;
+
+    @FXML
+    private AnchorPane learnPane, resultsPane, creditsPane;
+
+    @FXML
+    private Label meanResult, standardResult, varianceResult, alertLabel;
+
+    @FXML
+    private VBox contentBox;
+
+    public static Double pageStart = 0.0, pageEnd = (-1840.0 + 720);
 
     // Buttons
     Image sampleBtnImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/SampleBtn.png")));
@@ -62,31 +75,70 @@ public class MainController implements Initializable {
 
     @FXML
     private void onSampleButtonClicked(){
-        buttonChange("Sample");
-
+        alertLabel.setVisible(false);
         // check if text field has non-numeric characters
-        if (!inputField.getText().matches("[0-9, ]+")) {
+        if (!inputField.getText().matches("[-0-9, ]+")) {
             System.out.println("Invalid input");
             inputField.clear();
+            alertLabel.setVisible(true);
             return;
         }
+
+        // Set the data
         Calculator.setData(getInputData());
-        System.out.println(Calculator.getData());
+        Calculator.calculateAllForSample();
+
+        setResults();
+
+        // Change the buttons and content box
+        buttonChange("Sample");
+        rearrangeContentBox("Answer");
     }
 
     @FXML
     private void onPopulationButtonClicked(){
-        buttonChange("Population");
-
+        alertLabel.setVisible(false);
         // check if text field has non-numeric characters
-        if (!inputField.getText().matches("[0-9, ]+")) {
+        if (!inputField.getText().matches("[-0-9, ]+")) {
             System.out.println("Invalid input");
             inputField.clear();
+            alertLabel.setVisible(true);
             return;
         }
 
+        // Set the data
         Calculator.setData(getInputData());
-        System.out.println(Calculator.getData());
+        Calculator.calculateAllForPopulation();
+
+        setResults();
+
+        // Change the buttons and content box
+        buttonChange("Population");
+        rearrangeContentBox("Answer");
+    }
+
+    private void setResults(){
+        // Set the results and 2 decimal places
+        meanResult.setText("%.2f".formatted(Calculator.getMean()));
+        standardResult.setText("%.2f".formatted(Calculator.getStandardDeviation()));
+        varianceResult.setText("%.2f".formatted(Calculator.getVariance()));
+    }
+    private void rearrangeContentBox(String mode){
+        // Remove all the children of the content box
+        contentBox.getChildren().clear();
+        if (mode.equals("Answer")){
+            // Add the answer pane
+            contentBox.getChildren().add(resultsPane);
+            // Add the learn pane
+            contentBox.getChildren().add(learnPane);
+            // Add the credits pane
+            contentBox.getChildren().add(creditsPane);
+        } else {
+            // Add the learn pane
+            contentBox.getChildren().add(learnPane);
+            // Add the credits pane
+            contentBox.getChildren().add(creditsPane);
+        }
     }
 
     private void buttonChange(String button){
@@ -109,7 +161,6 @@ public class MainController implements Initializable {
 
             clickedButton = "Population";
         } else if (button.equals("Sample")){
-            System.out.println("Sample");
             // change button images
             populationBtn.setImage(populationBtnImg);
             sampleBtn.setImage(sampleBtnImgClicked);
@@ -145,6 +196,8 @@ public class MainController implements Initializable {
 
     @FXML
     private void onXButtonClicked(){
+        alertLabel.setVisible(false);
+
         // Clear the input field
         inputField.clear();
 
@@ -153,26 +206,9 @@ public class MainController implements Initializable {
 
         // Reset the buttons
         buttonChange("None");
-    }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Make the scroll pane scrollable
-        Double yPosition = scroll.getLayoutY();
-        scroll.setOnScroll(scrollEvent -> {
-            if (scroll.getLayoutY() + scrollEvent.getDeltaY() > yPosition) return;
-            scroll.setLayoutY(scroll.getLayoutY() + scrollEvent.getDeltaY());
-        });
-
-        // Set onhover listeners for ImageView infos
-        onHover(meanInfo, meanInfoSelectedImg, meanInfoImg);
-        onHover(standardDevInfo, standardDevInfoSelectedImg, standardDevInfoImg);
-        onHover(varianceInfo, varianceInfoSelectedImg, varianceInfoImg);
-
-        // Set onCLick listeners for ImageView infos
-        goToLink(meanInfo, "https://byjus.com/maths/mean/");
-        goToLink(standardDevInfo, "https://byjus.com/maths/standard-deviation/#:~:text=Standard%20Deviation%20is,statistical%20problems.");
-        goToLink(varianceInfo, "https://byjus.com/maths/variance/");
+        // Reset the content box
+        rearrangeContentBox("None");
     }
 
     private void goToLink(ImageView imageView, String link) {
@@ -213,5 +249,24 @@ public class MainController implements Initializable {
             // change the cursor to a hand
             imageView.getScene().setCursor(javafx.scene.Cursor.DEFAULT);
         });
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Make the scroll pane scrollable
+        scroll.setOnScroll(scrollEvent -> {
+            if (scroll.getLayoutY() + scrollEvent.getDeltaY() > pageStart) return;
+            scroll.setLayoutY(scroll.getLayoutY() + scrollEvent.getDeltaY());
+        });
+
+        // Set onhover listeners for ImageView infos
+        onHover(meanInfo, meanInfoSelectedImg, meanInfoImg);
+        onHover(standardDevInfo, standardDevInfoSelectedImg, standardDevInfoImg);
+        onHover(varianceInfo, varianceInfoSelectedImg, varianceInfoImg);
+
+        // Set onCLick listeners for ImageView infos
+        goToLink(meanInfo, "https://byjus.com/maths/mean/");
+        goToLink(standardDevInfo, "https://byjus.com/maths/standard-deviation/#:~:text=Standard%20Deviation%20is,statistical%20problems.");
+        goToLink(varianceInfo, "https://byjus.com/maths/variance/");
     }
 }

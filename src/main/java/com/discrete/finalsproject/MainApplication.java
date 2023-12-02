@@ -1,5 +1,6 @@
 package com.discrete.finalsproject;
 
+import com.discrete.finalsproject.Controllers.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

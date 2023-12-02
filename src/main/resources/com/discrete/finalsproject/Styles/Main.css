@@ -24,7 +24,22 @@
     -fx-border-width: 5;
     -fx-border-radius: 5 0 0 5;
     -fx-background-radius: 5;
+}
 
+.results{
+    -fx-font-size: 25;
+    -fx-pref-width: 300;
+    -fx-font-weight: bold;
+    -fx-background-color: #65E592;
+    -fx-border-color: #0e0e0e;
+    -fx-border-width: 5;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-pref-height: 150;
+}
+
+.answers{
+    -fx-font-size: 50;
 }
 
 #closebtn{
