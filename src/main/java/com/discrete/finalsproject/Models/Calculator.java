@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Calculator {
     private static ArrayList<Double> data;
     private static int numberOfData;
-    private static double mean, sampleStandardDeviation, sampleVariance,
-            sumOfXMinusMeanSquared, populationStandardDeviation, populationVariance;
-    private static ArrayList<Double> xMinusMean, xMinusMeanSquared;
+    private static double mean = 0, sampleStandardDeviation = 0, sampleVariance = 0,
+            sumOfXMinusMeanSquared = 0, populationStandardDeviation = 0, populationVariance = 0;
+    private static ArrayList<Double> xMinusMean = new ArrayList<>(), xMinusMeanSquared = new ArrayList<>();
 
     public static void setData(ArrayList<Double> inputData){
         data = inputData;
@@ -22,12 +22,12 @@ public class Calculator {
 
     // TODO: Calculate mean - Nicole
     public static void calculateMean(){
-        // Set the value of mean
-        // this.mean =
     }
 
+
+
     // Get mean
-    public double getMean(){
+    public static double getMean(){
         return mean;
     }
 
@@ -38,7 +38,7 @@ public class Calculator {
     }
 
     // Get variance
-    public double getVariance(){
+    public static double getVariance(){
         return sampleVariance;
     }
 
@@ -49,14 +49,12 @@ public class Calculator {
     }
 
     // Get standard deviation
-    public double getStandardDeviation(){
+    public static double getStandardDeviation(){
         return sampleStandardDeviation;
     }
 
     // TODO: Calculate population variance - Nicole
     public static void calculatePopulationVariance(){
-        // Set the value of population variance
-        // this.populationVariance =
     }
 
     // Get population variance
@@ -66,8 +64,6 @@ public class Calculator {
 
     // TODO: Calculate population standard deviation - Nicole
     public static void calculatePopulationStandardDeviation(){
-        // Set the value of population standard deviation
-        // this.populationStandardDeviation =
     }
 
     // Get population standard deviation
@@ -110,5 +106,25 @@ public class Calculator {
     // Get x minus mean squared
     public static ArrayList<Double> getXMinusMeanSquared(){
         return xMinusMeanSquared;
+    }
+
+    // Calculate all for sample
+    public static void calculateAllForSample(){
+        calculateMean();
+        calculateXMinusMean();
+        calculateXMinusMeanSquared();
+        calculateSumOfXMinusMeanSquared();
+        calculateVariance();
+        calculateStandardDeviation();
+    }
+
+    // Calculate all for population
+    public static void calculateAllForPopulation(){
+        calculateMean();
+        calculateXMinusMean();
+        calculateXMinusMeanSquared();
+        calculateSumOfXMinusMeanSquared();
+        calculatePopulationVariance();
+        calculatePopulationStandardDeviation();
     }
 }

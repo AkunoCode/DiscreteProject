@@ -1,5 +1,6 @@
 package com.discrete.finalsproject;
 
+import com.discrete.finalsproject.Controllers.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +16,9 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("FXMLs/Main.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+        stage.setTitle("Statify (Discrete Final Project)");
+        // set icon
+        stage.getIcons().add(new javafx.scene.image.Image(MainApplication.class.getResourceAsStream("Assets/Icon.png")));
         stage.show();
     }
 
