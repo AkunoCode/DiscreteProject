@@ -48,7 +48,7 @@ public class Calculator {
     // TODO: Calculate sample standard deviation - Adrielle
     public static void calculateStandardDeviation(){
         // Set the value of standard deviation
-        // this.standardDeviation =
+
     }
 
     // Get standard deviation
