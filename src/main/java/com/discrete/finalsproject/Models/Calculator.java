@@ -3,6 +3,7 @@ package com.discrete.finalsproject.Models;
 import java.util.ArrayList;
 
 public class Calculator {
+    private Calculator() {}
     private static ArrayList<Double> data;
     private static int numberOfData;
     private static double sumOfData, mean, sampleStandardDeviation, sampleVariance,
@@ -86,10 +87,12 @@ public class Calculator {
         return populationStandardDeviation;
     }
 
-    // TODO: Calculate sum of x minus mean squared - Johann
     public static void calculateSumOfXMinusMeanSquared(){
         // Set the value of sum of x minus mean squared
-        // this.sumOfXMinusMeanSquared =
+        sumOfXMinusMeanSquared = 0;
+        for (Double XminusMeanSquared: xMinusMeanSquared) {
+            sumOfXMinusMeanSquared += XminusMeanSquared;
+        }
     }
 
     // Get sum of x minus mean squared
