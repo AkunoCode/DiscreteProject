@@ -1,11 +1,17 @@
 package com.discrete.finalsproject.Controllers;
 
 import com.discrete.finalsproject.Models.Calculator;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -18,7 +24,6 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     // TODO: Table [Columns: Data, Data - Mean, (Data - Mean)^2] - Johann
-    // TODO: Histogram/Graph - Leo
     @FXML
     private TextField inputField;
 
@@ -43,7 +48,49 @@ public class MainController implements Initializable {
     @FXML
     private VBox contentBox;
 
+    @FXML
+    private TableColumn<Data, String> numberCol;
+
+    @FXML
+    private TableColumn<Data, String> numMinusMeanCol;
+
+    @FXML
+    private TableColumn<Data, String> squaredCol;
+
+    @FXML
+    private TableView<Data> dataTable;
+
     public static Double pageStart = 0.0;
+    public static class Data {
+        private final SimpleStringProperty number;
+        private final SimpleStringProperty numberMinusMean;
+        private final SimpleStringProperty numberMinusMeanSquared;
+
+        public Data(String number, String numberMinusMean, String numberMinusMeanSquared) {
+            this.number = new SimpleStringProperty(number);
+            this.numberMinusMean = new SimpleStringProperty(numberMinusMean);
+            this.numberMinusMeanSquared = new SimpleStringProperty(numberMinusMeanSquared);
+        }
+        public String getNumber() {
+            return number.get();
+        }
+
+        public String getNumberMinusMean() {
+            return numberMinusMean.get();
+        }
+
+        public String getNumberMinusMeanSquared() {
+            return numberMinusMeanSquared.get();
+        }
+        public static double sum(ArrayList<Double> numbers) {
+            double sum = 0;
+            for (double number : numbers) {
+                sum += number;
+            }
+            return sum;
+        }
+    }
+
 
     // Buttons
     Image sampleBtnImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/SampleBtn.png")));
@@ -130,10 +177,35 @@ public class MainController implements Initializable {
             varianceResult.setText("%.2f".formatted(Calculator.getPopulationVariance()));
         }
     }
+
+    private void displayTableView() {
+        ArrayList<Double> numbers = Calculator.getData();
+        ObservableList<Data> data = FXCollections.observableArrayList();
+
+        ArrayList<Double> sumOfXminusMean = new ArrayList<>();
+        int i = 0;
+        for (double number : numbers) {
+            sumOfXminusMean.add(number - Calculator.getMean());
+            data.add(new Data(String.valueOf(number),
+                    String.valueOf(number - Calculator.getMean()),
+                    String.valueOf(Calculator.getXMinusMeanSquared().get(i++))));
+        }
+        data.add(new Data("Total", String.valueOf(Data.sum(sumOfXminusMean)),
+                String.valueOf(Calculator.getSumOfXMinusMeanSquared())));
+
+        numberCol.setCellValueFactory(new PropertyValueFactory<>("number"));
+        numMinusMeanCol.setCellValueFactory(new PropertyValueFactory<>("numberMinusMean"));
+        squaredCol.setCellValueFactory(new PropertyValueFactory<>("numberMinusMeanSquared"));
+        dataTable.setItems(data);
+    }
+
     private void rearrangeContentBox(String mode){
         // Remove all the children of the content box
         contentBox.getChildren().clear();
         if (mode.equals("Answer")){
+            // Tableview
+            displayTableView();
+
             // Add the answer pane
             contentBox.getChildren().add(resultsPane);
             // Add the learn pane
@@ -277,3 +349,4 @@ public class MainController implements Initializable {
         goToLink(varianceInfo, "https://byjus.com/maths/variance/");
     }
 }
+
