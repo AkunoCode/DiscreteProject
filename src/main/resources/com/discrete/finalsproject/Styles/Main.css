@@ -62,3 +62,17 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
+
+.table-view{
+    -fx-border-color: #0e0e0e;
+    -fx-border-width: 5;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #323232;
+    -fx-font-size: 20;
+    -fx-font-family: Poppins;
+}
+
+.table-view .column-header {
+    -fx-background-color: #65e592;
+    -fx-border-color: #65e592;
+}
