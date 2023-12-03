@@ -6,7 +6,7 @@ public class Calculator {
     private static ArrayList<Double> data;
     private static int numberOfData;
     private static double sumOfData, mean, sampleStandardDeviation, sampleVariance,
-            sumOfXMinusMeanSquared, populationStandardDeviation, populationVariance;
+            sumOfXMinusMeanSquared, sumSquaredDifferences ,populationStandardDeviation, populationVariance;
     private static ArrayList<Double> xMinusMean, xMinusMeanSquared;
 
     public static void setData(ArrayList<Double> inputData){
@@ -36,8 +36,13 @@ public class Calculator {
 
     // TODO: Calculate sample variance - Adrielle
     public static void calculateVariance(){
-        // Set the value of variance
-        // this.variance =
+        sumSquaredDifferences = 0;
+
+        for(double val: data) {
+            sumSquaredDifferences += Math.pow(val-mean, 2);
+        }
+
+        sampleVariance = sumSquaredDifferences / (data.size() - 1);
     }
 
     // Get variance
@@ -47,8 +52,7 @@ public class Calculator {
 
     // TODO: Calculate sample standard deviation - Adrielle
     public static void calculateStandardDeviation(){
-        // Set the value of standard deviation
-
+        sampleStandardDeviation = Math.sqrt(sampleVariance);
     }
 
     // Get standard deviation
