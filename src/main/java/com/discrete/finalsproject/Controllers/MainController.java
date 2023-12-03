@@ -186,17 +186,40 @@ public class MainController implements Initializable {
         int i = 0;
         for (double number : numbers) {
             sumOfXminusMean.add(number - Calculator.getMean());
-            data.add(new Data(String.valueOf(number),
-                    String.valueOf(number - Calculator.getMean()),
-                    String.valueOf(Calculator.getXMinusMeanSquared().get(i++))));
+            data.add(new Data(
+                    "%.2f".formatted(number),
+                    "%.2f".formatted(number - Calculator.getMean()),
+                    "%.2f".formatted(Calculator.getXMinusMeanSquared().get(i++))));
         }
-        data.add(new Data("Total", String.valueOf(Data.sum(sumOfXminusMean)),
-                String.valueOf(Calculator.getSumOfXMinusMeanSquared())));
+        data.add(new Data(
+                "%.2f".formatted(Data.sum(numbers)) + " (f = " + numbers.size() + ")",
+                "",
+                "%.2f".formatted(Calculator.getSumOfXMinusMeanSquared())));
 
         numberCol.setCellValueFactory(new PropertyValueFactory<>("number"));
         numMinusMeanCol.setCellValueFactory(new PropertyValueFactory<>("numberMinusMean"));
         squaredCol.setCellValueFactory(new PropertyValueFactory<>("numberMinusMeanSquared"));
         dataTable.setItems(data);
+
+        // Center the text in the table
+        numberCol.setStyle("-fx-alignment: CENTER;");
+        numMinusMeanCol.setStyle("-fx-alignment: CENTER;");
+        squaredCol.setStyle("-fx-alignment: CENTER;");
+
+        // Make the last row bold
+        dataTable.setRowFactory(tv -> new javafx.scene.control.TableRow<>() {
+            @Override
+            protected void updateItem(Data item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setStyle("");
+                } else if (item.getNumber().contains("f =")) {
+                    setStyle("-fx-font-weight: bold");
+                } else {
+                    setStyle("");
+                }
+            }
+        });
     }
 
     private void rearrangeContentBox(String mode){
