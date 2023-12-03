@@ -68,7 +68,7 @@
                         <Label alignment="CENTER" layoutX="50.0" layoutY="143.0" style="-fx-font-size: 30; -fx-font-weight: bold;" text="Catalla, Johann Sebastian" />
                         <Label alignment="CENTER" layoutX="50.0" layoutY="173.0" style="-fx-font-size: 30; -fx-font-weight: bold;" text="Echevaria, John Leo" />
                         <Label alignment="CENTER" layoutX="675.0" layoutY="142.0" style="-fx-font-size: 30; -fx-font-weight: bold;" text="Oriola, Princess Nicole" />
-                        <Label alignment="CENTER" layoutX="675.0" layoutY="172.0" style="-fx-font-size: 30; -fx-font-weight: bold;" text="Reyes, Adrielle Joyce" />
+                        <Label alignment="CENTER" layoutX="675.0" layoutY="172.0" style="-fx-font-size: 30; -fx-font-weight: bold;" text="Reyes, Adrielle Joice" />
                      </children>
                   </AnchorPane>
                </children>

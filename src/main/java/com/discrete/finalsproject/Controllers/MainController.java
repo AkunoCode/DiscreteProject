@@ -3,7 +3,7 @@ package com.discrete.finalsproject.Controllers;
 import com.discrete.finalsproject.Models.Calculator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -43,7 +43,7 @@ public class MainController implements Initializable {
     @FXML
     private VBox contentBox;
 
-    public static Double pageStart = 0.0, pageEnd = (-1840.0 + 720);
+    public static Double pageStart = 0.0;
 
     // Buttons
     Image sampleBtnImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/SampleBtn.png")));
@@ -88,7 +88,7 @@ public class MainController implements Initializable {
         Calculator.setData(getInputData());
         Calculator.calculateAllForSample();
 
-        setResults();
+        setResults("Sample");
 
         // Change the buttons and content box
         buttonChange("Sample");
@@ -110,18 +110,25 @@ public class MainController implements Initializable {
         Calculator.setData(getInputData());
         Calculator.calculateAllForPopulation();
 
-        setResults();
+        setResults("Population");
 
         // Change the buttons and content box
         buttonChange("Population");
         rearrangeContentBox("Answer");
     }
 
-    private void setResults(){
+    private void setResults(String mode){
         // Set the results and 2 decimal places
-        meanResult.setText("%.2f".formatted(Calculator.getMean()));
-        standardResult.setText("%.2f".formatted(Calculator.getStandardDeviation()));
-        varianceResult.setText("%.2f".formatted(Calculator.getVariance()));
+        if (mode.equals("Sample")){
+            meanResult.setText("%.2f".formatted(Calculator.getMean()));
+            standardResult.setText("%.2f".formatted(Calculator.getStandardDeviation()));
+            varianceResult.setText("%.2f".formatted(Calculator.getVariance()));
+
+        } else if (mode.equals("Population")){
+            meanResult.setText("%.2f".formatted(Calculator.getMean()));
+            standardResult.setText("%.2f".formatted(Calculator.getPopulationStandardDeviation()));
+            varianceResult.setText("%.2f".formatted(Calculator.getPopulationVariance()));
+        }
     }
     private void rearrangeContentBox(String mode){
         // Remove all the children of the content box

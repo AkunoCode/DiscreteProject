@@ -6,8 +6,12 @@ public class Calculator {
     private Calculator() {}
     private static ArrayList<Double> data;
     private static int numberOfData;
-    private static double sumOfData, mean, sampleStandardDeviation, sampleVariance,
-            sumOfXMinusMeanSquared, sumSquaredDifferences ,populationStandardDeviation, populationVariance;
+    private static double mean;
+    private static double sampleStandardDeviation;
+    private static double sampleVariance;
+    private static double sumOfXMinusMeanSquared;
+    private static double populationStandardDeviation;
+    private static double populationVariance;
     private static ArrayList<Double> xMinusMean, xMinusMeanSquared;
 
     public static void setData(ArrayList<Double> inputData){
@@ -21,9 +25,9 @@ public class Calculator {
         return numberOfData;
     }
 
-    // TODO: Calculate mean - Nicole
+    // Calculate Mean
     public static void calculateMean(){
-        sumOfData = 0.0;
+        double sumOfData = 0.0;
         for (Double d : data) {
             sumOfData += d;
         }
@@ -35,15 +39,8 @@ public class Calculator {
         return mean;
     }
 
-    // TODO: Calculate sample variance - Adrielle
     public static void calculateVariance(){
-        sumSquaredDifferences = 0;
-
-        for(double val: data) {
-            sumSquaredDifferences += Math.pow(val-mean, 2);
-        }
-
-        sampleVariance = sumSquaredDifferences / (data.size() - 1);
+        sampleVariance = getSumOfXMinusMeanSquared() / (data.size() - 1);
     }
 
     // Get variance
@@ -51,7 +48,7 @@ public class Calculator {
         return sampleVariance;
     }
 
-    // TODO: Calculate sample standard deviation - Adrielle
+    // Calculate standard deviation
     public static void calculateStandardDeviation(){
         sampleStandardDeviation = Math.sqrt(sampleVariance);
     }
@@ -61,29 +58,23 @@ public class Calculator {
         return sampleStandardDeviation;
     }
 
-    // TODO: Calculate population variance - Nicole
+    // Calculate population variance
     public static void calculatePopulationVariance(){
-        ArrayList<Double> xMinusMeanSquared = getXMinusMeanSquared();
-        sumOfXMinusMeanSquared = 0.0;
-        for (Double squaredValue : xMinusMeanSquared) {
-            sumOfXMinusMeanSquared += squaredValue;
-        }
-        populationVariance = sumOfXMinusMeanSquared / numberOfData;
+        populationVariance = getSumOfXMinusMeanSquared() / numberOfData;
     }
 
     // Get population variance
-    public double getPopulationVariance(){
+    public static double getPopulationVariance(){
         return populationVariance;
     }
 
-    // TODO: Calculate population standard deviation - Nicole
+    // Calculate population standard deviation
     public static void calculatePopulationStandardDeviation(){
-        calculatePopulationVariance();
         populationStandardDeviation = Math.sqrt(populationVariance);
     }
 
     // Get population standard deviation
-    public double getPopulationStandardDeviation(){
+    public static double getPopulationStandardDeviation(){
         return populationStandardDeviation;
     }
 
@@ -96,11 +87,11 @@ public class Calculator {
     }
 
     // Get sum of x minus mean squared
-    public double getSumOfXMinusMeanSquared(){
+    public static double getSumOfXMinusMeanSquared(){
         return sumOfXMinusMeanSquared;
     }
 
-    // TODO: caclulate X minus mean - Leo
+    // Calculate x minus mean
     public static void calculateXMinusMean(){
         xMinusMean = new ArrayList<>();
         for (Double d : data) {
@@ -113,7 +104,7 @@ public class Calculator {
         return xMinusMean;
     }
 
-    // TODO: calculate X minus mean squared - Leo
+    // Calculate x minus mean squared
     public static void calculateXMinusMeanSquared(){
         xMinusMeanSquared = new ArrayList<>();
         for (Double d : xMinusMean) {
