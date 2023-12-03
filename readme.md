@@ -1,4 +1,4 @@
-# Statify (Mean, Variance, Standard Deviation Calculator)
+#Statify (Mean, Variance, Standard Deviation Calculator)
 ## CSDS102 - Discrete Structures 2 (Finals Project)
 
 Statify is a simple calculator that computes the mean, variance, and standard deviation of a given set of numbers. It also displays a table of values for the given set of numbers.
