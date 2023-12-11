@@ -60,6 +60,10 @@ public class MainController implements Initializable {
     @FXML
     private TableView<Data> dataTable;
 
+    //probability bar chart
+    @FXML
+    private BarChart<String, Double> probabilityBarChart;
+
     public static Double pageStart = 0.0;
     public static class Data {
         private final SimpleStringProperty number;
@@ -108,6 +112,68 @@ public class MainController implements Initializable {
     Image varianceInfoSelectedImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/discrete/finalsproject/Assets/VarianceDefSelected.png")));
 
     String clickedButton = "None";
+
+    // Create a probability distribution bar chart
+    private void createProbabilityBarChart() {
+        // Create a list of series
+        ObservableList<BarChart.Series<String, Double>> barChartData = FXCollections.observableArrayList();
+
+        // Create a series
+        BarChart.Series<String, Double> series = new BarChart.Series<>();
+
+        // Create hashmap of numbers and their frequency and the total frequency
+        ArrayList<Double> numbers = Calculator.getData();
+        ArrayList<Double> frequency = new ArrayList<>();
+        ArrayList<Double> probability = new ArrayList<>();
+        double totalFrequency = 0;
+        for (double number : numbers) {
+            double count = 0;
+            for (double number2 : numbers) {
+                if (number == number2) {
+                    count++;
+                }
+            }
+            frequency.add(count);
+            totalFrequency += count;
+        }
+
+        // Calculate the probability
+        for (double number : frequency) {
+            probability.add(number / totalFrequency);
+        }
+
+        // Add the data to the series
+        for (int i = 0; i < numbers.size(); i++) {
+            series.getData().add(new BarChart.Data<>(numbers.get(i).toString(), probability.get(i)));
+        }
+
+        // Add the series to the list of series
+        barChartData.add(series);
+
+        // Set the data to the bar chart
+        probabilityBarChart.setData(barChartData);
+
+        // Set the title of the bar chart
+        probabilityBarChart.setTitle("Probability Distribution");
+
+        // Set the x-axis label
+        probabilityBarChart.getXAxis().setLabel("Data");
+
+        // Set the y-axis label
+        probabilityBarChart.getYAxis().setLabel("Probability");
+
+        // Set the bar chart to animated
+        probabilityBarChart.setAnimated(false);
+
+        // change all the bar color
+        for (BarChart.Data<String, Double> data : series.getData()) {
+            data.getNode().setStyle("-fx-bar-fill: #65e592;");
+        }
+
+        // Set the bar chart to legend visible
+        probabilityBarChart.setLegendVisible(false);
+    }
+
     private ArrayList<Double> getInputData(){
         // Convert commas to spaces and split by spaces. If there is more than one space, convert it to one space.
         String[] inputString = inputField.getText().replaceAll(",", " ").replaceAll("\\s+", " ").split(" ");
@@ -124,7 +190,7 @@ public class MainController implements Initializable {
     private void onSampleButtonClicked(){
         alertLabel.setVisible(false);
         // check if text field has non-numeric characters
-        if (!inputField.getText().matches("[-0-9, ]+")) {
+        if (!inputField.getText().matches("[-0-9., ]+")) {
             System.out.println("Invalid input");
             inputField.clear();
             alertLabel.setVisible(true);
@@ -146,7 +212,7 @@ public class MainController implements Initializable {
     private void onPopulationButtonClicked(){
         alertLabel.setVisible(false);
         // check if text field has non-numeric characters
-        if (!inputField.getText().matches("[-0-9, ]+")) {
+        if (!inputField.getText().matches("[-0-9., ]+")) {
             System.out.println("Invalid input");
             inputField.clear();
             alertLabel.setVisible(true);
@@ -176,6 +242,7 @@ public class MainController implements Initializable {
             standardResult.setText("%.2f".formatted(Calculator.getPopulationStandardDeviation()));
             varianceResult.setText("%.2f".formatted(Calculator.getPopulationVariance()));
         }
+        createProbabilityBarChart();
     }
 
     private void displayTableView() {

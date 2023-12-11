@@ -55,6 +55,14 @@
     -fx-padding: 0;
 }
 
+.probabilityBarChart{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #0e0e0e;
+    -fx-border-width: 5;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
 .shadow{
     -fx-background-color: #0e0e0e;
     -fx-border-color: #0e0e0e;
